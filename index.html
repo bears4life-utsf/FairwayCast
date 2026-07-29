@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>FairwayCast</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #071f18;
+      background: #f5f7f4;
+    }
+
+    .topbar {
+      min-height: 72px;
+      background: linear-gradient(90deg, #003b24, #0d4b32);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 44px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .nav {
+      display: flex;
+      gap: 34px;
+      font-size: 17px;
+    }
+
+    .nav span:first-child {
+      color: #88e277;
+      font-weight: bold;
+    }
+
+    .searchbar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 8px;
+      padding: 6px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .searchbar input {
+      border: none;
+      outline: none;
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    #courseInput { width: 260px; }
+    #playDate { width: 150px; }
+    #teeTime { width: 115px; }
+
+    button {
+      background: #063b25;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      padding: 52px 48px 32px 48px;
+      min-height: calc(100vh - 72px);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 62%;
+      height: 520px;
+      background:
+        linear-gradient(90deg, #f5f7f4 0%, rgba(245,247,244,0.9) 20%, rgba(245,247,244,0.12) 55%),
+        url("https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1400&q=80");
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: 58px;
+      margin: 0 0 24px 0;
+    }
+
+    .divider {
+      width: 560px;
+      border-top: 1px solid #d0d7d2;
+      margin-bottom: 24px;
+    }
+
+    .decision {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .check {
+      width: 64px;
+      height: 64px;
+      border: 4px solid #087532;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      color: #087532;
+      font-weight: bold;
+    }
+
+    .decision h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .badge {
+      background: #16823c;
+      color: white;
+      padding: 4px 14px;
+      border-radius: 8px;
+      margin-left: 10px;
+    }
+
+    .decision p {
+      margin: 8px 0 0 0;
+      font-size: 18px;
+    }
+
+    .course {
+      margin-top: 24px;
+      margin-bottom: 28px;
+    }
+
+    .course h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      margin: 0 0 8px 0;
+    }
+
+    .course p {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 320px repeat(3, 1fr);
+      gap: 18px;
+      max-width: 1220px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.94);
+      border: 1px solid #d9dfdb;
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      min-height: 150px;
+    }
+
+    .big-card { grid-row: span 2; }
+
+    .card-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .icon {
+      background: #e1eee4;
+      color: #063b25;
+      width: 54px;
+      height: 54px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .metric {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .card p, .card li {
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .why {
+      color: #087532;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .watch {
+      color: #ef5b00;
+      font-weight: bold;
+      margin-top: 22px;
+    }
+
+    .takeaway {
+      max-width: 1220px;
+      margin-top: 18px;
+      padding: 18px 22px;
+      border-radius: 12px;
+      background: #edf7ee;
+      border: 1px solid #d0e8d4;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 17px;
+    }
+
+    .takeaway strong {
+      color: #087532;
+      font-size: 18px;
+    }
+
+    .hourly {
+      max-width: 1220px;
+      margin-top: 18px;
+      background: white;
+      border-radius: 10px;
+      padding: 18px;
+      border: 1px solid #d9dfdb;
+    }
+
+    .hour-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .hour-box {
+      background: #f3f6f4;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .raw {
+      max-width: 1220px;
+      margin-top: 18px;
+    }
+
+    details {
+      background: white;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav { display: none; }
+
+      .hero::after {
+        opacity: 0.25;
+        width: 100%;
+      }
+
+      h1 { font-size: 40px; }
+
+      .cards { grid-template-columns: 1fr; }
+
+      .hour-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">⚑ FairwayCast</div>
+
+    <div class="nav">
+      <span>Advisor</span>
+      <span>Courses</span>
+      <span>Forecasts</span>
+      <span>My Play</span>
+    </div>
+
+    <div class="searchbar">
+      <input id="courseInput" value="Sleepy Ridge Golf Course" />
+      <input id="playDate" type="date" />
+      <input id="teeTime" type="time" value="08:00" />
+      <button onclick="getGolfCourseWeather()">Get Weather</button>
+    </div>
+  </div>
+
+  <main class="hero">
+    <div class="content">
+      <h1>Golf Course Weather Advisor</h1>
+      <div class="divider"></div>
+
+      <section class="decision">
+        <div class="check" id="decisionIcon">✓</div>
+        <div>
+          <h2>SHOULD I PLAY? <span class="badge" id="decisionBadge">YES</span></h2>
+          <p id="decisionReason">Enter a course, date, and tee time, then click Get Weather.</p>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="course">
+        <h2 id="courseName">Course</h2>
+        <p id="courseAddress">Search for a golf course above.</p>
+        <p>
+          <strong>Date:</strong> <span id="dateDisplay">--</span>
+          &nbsp; | &nbsp;
+          <strong>Tee Time:</strong> <span id="teeTimeDisplay">--</span>
+          &nbsp; | &nbsp;
+          <strong>Round Window:</strong> <span id="roundWindow">--</span>
+        </p>
+      </section>
+
+      <section class="cards">
+        <div class="card big-card">
+          <div class="card-title">
+            <div class="icon">★</div>
+            Golf Recommendation
+          </div>
+
+          <div class="why">Why:</div>
+          <ul id="positivesList">
+            <li>Waiting for forecast.</li>
+          </ul>
+
+          <hr>
+
+          <div class="watch">Watch Out:</div>
+          <ul id="watchOutList">
+            <li>Waiting for forecast.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon">♨</div>Temperature</div>
+          <div class="metric" id="temperatureMetric">--</div>
+          <p id="temperatureAdvice">Waiting for forecast.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon">⚑</div>Wind</div>
+          <div class="metric" id="windMetric">--</div>
+          <p id="windAdvice">Waiting for forecast.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon">☀</div>Sun</div>
+          <div class="metric" id="sunMetric">--</div>
+          <p id="sunAdvice">Waiting for forecast.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon">☔</div>Rain</div>
+          <div class="metric" id="rainMetric">--</div>
+          <p id="rainAdvice">Waiting for forecast.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon">UV</div>UV / Sun</div>
+          <div class="metric" id="uvMetric">--</div>
+          <p id="uvAdvice">Waiting for forecast.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon">▣</div>Bring</div>
+          <ul id="bringList">
+            <li>Waiting for forecast.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="takeaway">
+        <div class="icon">☀</div>
+        <strong>Quick Takeaway</strong>
+        <span id="quickTakeaway">Run the forecast to get a golfer-friendly recommendation.</span>
+      </section>
+
+      <section class="hourly">
+        <strong>Hourly Round Forecast</strong>
+        <div class="hour-grid" id="hourlyGrid"></div>
+      </section>
+
+      <section class="raw">
+        <details>
+          <summary>Raw API Data</summary>
+          <pre id="output"></pre>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const today = new Date().toISOString().slice(0, 10);
+      document.getElementById("playDate").value = today;
+    });
+
+    async function getGolfCourseWeather() {
+      const courseInput = document.getElementById("courseInput").value;
+      const playDate = document.getElementById("playDate").value;
+      const teeTime = document.getElementById("teeTime").value;
+
+      if (!playDate) {
+        document.getElementById("decisionReason").innerText = "Please select a date.";
+        return;
+      }
+
+      setLoadingState();
+
+      const searchQuery = courseInput + " golf course";
+
+      const courseUrl =
+        "https://nominatim.openstreetmap.org/search" +
+        "?q=" + encodeURIComponent(searchQuery) +
+        "&format=json" +
+        "&limit=1";
+
+      const courseResponse = await fetch(courseUrl);
+      const courseData = await courseResponse.json();
+
+      if (!courseData || courseData.length === 0) {
+        document.getElementById("decisionReason").innerText =
+          "Could not find that golf course.";
+        return;
+      }
+
+      const course = courseData[0];
+
+      const weatherUrl =
+        "https://api.open-meteo.com/v1/forecast" +
+        "?latitude=" + course.lat +
+        "&longitude=" + course.lon +
+        "&hourly=temperature_2m,precipitation_probability,wind_speed_10m,uv_index" +
+        "&forecast_days=7" +
+        "&temperature_unit=fahrenheit" +
+        "&wind_speed_unit=mph" +
+        "&timezone=auto";
+
+      const weatherResponse = await fetch(weatherUrl);
+      const weatherData = await weatherResponse.json();
+
+      const hourly = weatherData.hourly;
+
+      const teeHour = teeTime.slice(0, 2);
+      const teeTimeString = playDate + "T" + teeHour + ":00";
+
+      const startIndex = hourly.time.findIndex(function (time) {
+        return time === teeTimeString;
+      });
+
+      if (startIndex === -1) {
+        document.getElementById("decisionReason").innerText =
+          "Could not find forecast for that date and tee time. Try a date within the next 7 days.";
+        return;
+      }
+
+      const golfHours = [];
+
+      for (let i = startIndex; i < startIndex + 6 && i < hourly.time.length; i++) {
+        golfHours.push({
+          time: hourly.time[i],
+          temperature: hourly.temperature_2m[i],
+          wind: hourly.wind_speed_10m[i],
+          rainChance: hourly.precipitation_probability[i],
+          uvIndex: hourly.uv_index[i]
+        });
+      }
+
+      const temps = golfHours.map(hour => hour.temperature);
+      const winds = golfHours.map(hour => hour.wind);
+      const rainChances = golfHours.map(hour => hour.rainChance);
+      const uvIndexes = golfHours.map(hour => hour.uvIndex);
+
+      const minTemp = Math.min(...temps);
+      const maxTemp = Math.max(...temps);
+      const maxWind = Math.max(...winds);
+      const maxRainChance = Math.max(...rainChances);
+      const maxUv = Math.max(...uvIndexes);
+
+      let shouldPlay = "";
+      let decisionReason = "";
+
+      if (maxRainChance >= 70) {
+        shouldPlay = "NO";
+        decisionReason = "Rain risk is too high during your round.";
+      } else if (maxWind >= 30) {
+        shouldPlay = "NO";
+        decisionReason = "Wind is likely too strong to enjoy the round.";
+      } else if (maxTemp >= 100) {
+        shouldPlay = "NO";
+        decisionReason = "It may be dangerously hot for a full round.";
+      } else if (maxRainChance >= 50 || maxWind >= 22 || maxTemp >= 95) {
+        shouldPlay = "MAYBE";
+        decisionReason = "Playable, but conditions could make the round frustrating.";
+      } else {
+        shouldPlay = "YES";
+        decisionReason = "Conditions look good enough to play.";
+      }
+
+      const tempAdvice = getTemperatureAdvice(minTemp, maxTemp);
+      const windAdvice = getWindAdvice(maxWind);
+      const rainAdvice = getRainAdvice(maxRainChance);
+      const uvAdvice = getUvAdvice(maxUv);
+
+      const positives = [];
+      const watchOuts = [];
+      const itemsToBring = [];
+
+      if (maxTemp >= 55 && maxTemp <= 85) positives.push("Comfortable temperature");
+      if (maxWind < 15) positives.push("Wind should be manageable");
+      if (maxRainChance < 30) positives.push("Low rain risk");
+
+      if (maxWind >= 15) watchOuts.push("Wind may affect shots");
+      if (maxRainChance >= 30) watchOuts.push("Rain risk during the round");
+      if (maxTemp >= 85) watchOuts.push("Heat may become a factor");
+      if (maxUv >= 6) watchOuts.push("High UV exposure");
+
+      if (maxUv >= 3) itemsToBring.push("sunscreen");
+      if (maxUv >= 6) itemsToBring.push("hat");
+      if (maxUv >= 6) itemsToBring.push("sunglasses");
+      if (maxTemp >= 80) itemsToBring.push("extra water");
+      if (maxRainChance >= 40) itemsToBring.push("rain gear");
+      if (minTemp < 60) itemsToBring.push("light jacket");
+      if (maxWind >= 15) itemsToBring.push("wind shirt");
+
+      updateUI({
+        course,
+        playDate,
+        teeTime,
+        golfHours,
+        minTemp,
+        maxTemp,
+        maxWind,
+        maxRainChance,
+        maxUv,
+        shouldPlay,
+        decisionReason,
+        positives,
+        watchOuts,
+        itemsToBring,
+        tempAdvice,
+        windAdvice,
+        rainAdvice,
+        uvAdvice,
+        weatherData,
+        courseInput
+      });
+    }
+
+    function setLoadingState() {
+      document.getElementById("decisionBadge").innerText = "...";
+      document.getElementById("decisionReason").innerText = "Loading course and weather data...";
+      document.getElementById("hourlyGrid").innerHTML = "";
+      document.getElementById("output").innerText = "";
+    }
+
+    function getTemperatureAdvice(minTemp, maxTemp) {
+      if (maxTemp < 50) return "Cold round. Dress warm and expect the ball to travel shorter.";
+      if (minTemp < 55 && maxTemp < 70) return "Cool but playable. A light jacket or pullover is smart.";
+      if (maxTemp <= 85) return "Comfortable golf temperature.";
+      if (maxTemp <= 95) return "Hot round. Bring extra water and expect fatigue later.";
+      return "Very hot round. Hydration is a major factor.";
+    }
+
+    function getWindAdvice(maxWind) {
+      if (maxWind < 8) return "Low wind. It should not affect shots much.";
+      if (maxWind < 15) return "Moderate wind. Club selection may matter on longer shots.";
+      if (maxWind < 25) return "Windy round. Expect the wind to affect drives, approach shots, and putting feel.";
+      return "Very windy. Scoring may be difficult.";
+    }
+
+    function getRainAdvice(maxRainChance) {
+      if (maxRainChance < 20) return "Low rain risk.";
+      if (maxRainChance < 40) return "Some rain risk. Keep an eye on the sky.";
+      if (maxRainChance < 60) return "Moderate rain risk. Bring rain gear.";
+      return "High rain risk. Consider a different tee time.";
+    }
+
+    function getUvAdvice(maxUv) {
+      if (maxUv < 3) return "Low UV. Sunscreen is optional but still smart.";
+      if (maxUv < 6) return "Moderate UV. Sunscreen is a good idea.";
+      if (maxUv < 8) return "High UV. Wear sunscreen.";
+      if (maxUv < 11) return "Very high UV. Sunscreen, hat, and sunglasses strongly recommended.";
+      return "Extreme UV. Avoid long exposure if possible.";
+    }
+
+    function formatTime(timeString) {
+      const hour = parseInt(timeString.split(":")[0], 10);
+      const minute = timeString.split(":")[1];
+      const ampm = hour >= 12 ? "PM" : "AM";
+      const displayHour = hour % 12 || 12;
+      return displayHour + ":" + minute + " " + ampm;
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString + "T12:00:00");
+      return date.toLocaleDateString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric"
+      });
+    }
+
+    function updateUI(data) {
+      document.getElementById("decisionBadge").innerText = data.shouldPlay;
+      document.getElementById("decisionReason").innerText = data.decisionReason;
+
+      document.getElementById("courseName").innerText =
+        data.course.display_name.split(",")[0];
+
+      document.getElementById("courseAddress").innerText =
+        data.course.display_name;
+
+      document.getElementById("dateDisplay").innerText =
+        formatDate(data.playDate);
+
+      document.getElementById("teeTimeDisplay").innerText =
+        formatTime(data.teeTime);
+
+      document.getElementById("roundWindow").innerText =
+        formatTime(data.golfHours[0].time.split("T")[1]) +
+        " - " +
+        formatTime(data.golfHours[data.golfHours.length - 1].time.split("T")[1]);
+
+      document.getElementById("temperatureMetric").innerText =
+        data.minTemp + " F to " + data.maxTemp + " F";
+
+      document.getElementById("temperatureAdvice").innerText = data.tempAdvice;
+
+      document.getElementById("windMetric").innerText =
+        "Max " + data.maxWind + " mph";
+
+      document.getElementById("windAdvice").innerText = data.windAdvice;
+
+      document.getElementById("sunMetric").innerText =
+        "Max UV " + data.maxUv;
+
+      document.getElementById("sunAdvice").innerText = data.uvAdvice;
+
+      document.getElementById("rainMetric").innerText =
+        "Max rain chance " + data.maxRainChance + "%";
+
+      document.getElementById("rainAdvice").innerText = data.rainAdvice;
+
+      document.getElementById("uvMetric").innerText =
+        "Max UV " + data.maxUv;
+
+      document.getElementById("uvAdvice").innerText = data.uvAdvice;
+
+      fillList("positivesList", data.positives.length ? data.positives : ["No major positives found"]);
+      fillList("watchOutList", data.watchOuts.length ? data.watchOuts : ["No major concerns"]);
+      fillList("bringList", data.itemsToBring.length ? data.itemsToBring : ["normal golf gear"]);
+
+      document.getElementById("quickTakeaway").innerText =
+        data.decisionReason + " " +
+        "Expect temperatures from " + data.minTemp + " F to " + data.maxTemp + " F, " +
+        "max wind of " + data.maxWind + " mph, " +
+        "rain chance up to " + data.maxRainChance + "%, " +
+        "and max UV of " + data.maxUv + ".";
+
+      const hourlyGrid = document.getElementById("hourlyGrid");
+      hourlyGrid.innerHTML = "";
+
+      data.golfHours.forEach(function(hour) {
+        const box = document.createElement("div");
+        box.className = "hour-box";
+
+        box.innerHTML =
+          "<strong>" + formatTime(hour.time.split("T")[1]) + "</strong><br>" +
+          hour.temperature + " F<br>" +
+          "Wind " + hour.wind + " mph<br>" +
+          "Rain " + hour.rainChance + "%<br>" +
+          "UV " + hour.uvIndex;
+
+        hourlyGrid.appendChild(box);
+      });
+
+      document.getElementById("output").textContent =
+        JSON.stringify(
+          {
+            searchedCourse: data.courseInput,
+            courseFound: data.course,
+            playDate: data.playDate,
+            teeTime: data.teeTime,
+            golfHours: data.golfHours,
+            shouldPlay: data.shouldPlay,
+            decisionReason: data.decisionReason,
+            fullWeatherData: data.weatherData
+          },
+          null,
+          2
+        );
+    }
+
+    function fillList(id, items) {
+      const list = document.getElementById(id);
+      list.innerHTML = "";
+
+      items.forEach(function(item) {
+        const li = document.createElement("li");
+        li.innerText = item;
+        list.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs and env (future-proofing)
+*.log
+.env
+.env.*
+!.env.example
+
+# Optional local tooling
+node_modules/
+.cache/
+dist/
+build/
