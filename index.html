@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FairwayCast</title>
 
   <style>
@@ -291,20 +292,98 @@
       .topbar {
         flex-direction: column;
         align-items: stretch;
+        padding: 14px 16px;
+        gap: 12px;
       }
+
+      .brand { font-size: 24px; }
 
       .nav { display: none; }
 
-      .hero::after {
-        opacity: 0.25;
+      .searchbar {
+        flex-direction: column;
+        align-items: stretch;
         width: 100%;
       }
 
-      h1 { font-size: 40px; }
+      .searchbar input,
+      #courseInput,
+      #playDate,
+      #teeTime {
+        width: 100%;
+      }
 
-      .cards { grid-template-columns: 1fr; }
+      .searchbar button {
+        width: 100%;
+      }
+
+      .hero {
+        padding: 28px 16px 24px;
+        min-height: auto;
+      }
+
+      .hero::after {
+        opacity: 0.22;
+        width: 100%;
+        height: 280px;
+      }
+
+      h1 { font-size: 34px; line-height: 1.15; }
+
+      .divider { width: 100%; max-width: 560px; }
+
+      .decision {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .decision h2 { font-size: 22px; }
+
+      .check {
+        width: 52px;
+        height: 52px;
+        font-size: 32px;
+      }
+
+      .course h2 { font-size: 26px; }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .big-card { grid-row: auto; }
+
+      .card { min-height: 0; padding: 18px; }
+
+      .card-title { font-size: 20px; }
+
+      .icon {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+      }
+
+      .takeaway,
+      .hourly,
+      .raw {
+        max-width: 100%;
+      }
+
+      .takeaway {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 16px;
+      }
 
       .hour-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 28px; }
+
+      .hour-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
