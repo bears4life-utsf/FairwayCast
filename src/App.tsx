@@ -65,7 +65,7 @@ export default function App() {
   const timeId = useId()
   const resultsRef = useRef<HTMLElement>(null)
 
-  const [courseQuery, setCourseQuery] = useState('Sleepy Ridge Golf Course')
+  const [courseQuery, setCourseQuery] = useState('TPC Sawgrass')
   const [playDate, setPlayDate] = useState(todayIsoDate())
   const [teeTime, setTeeTime] = useState('08:00')
   const [loading, setLoading] = useState(false)
