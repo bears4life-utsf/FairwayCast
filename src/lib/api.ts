@@ -79,10 +79,10 @@ function buildRoundHours(
   for (let i = startIndex; i < startIndex + 6 && i < hourly.time.length; i += 1) {
     golfHours.push({
       time: hourly.time[i],
-      temperature: hourly.temperature_2m[i],
-      wind: hourly.wind_speed_10m[i],
-      rainChance: hourly.precipitation_probability[i],
-      uvIndex: hourly.uv_index[i],
+      temperature: Math.round(hourly.temperature_2m[i]),
+      wind: Math.round(hourly.wind_speed_10m[i]),
+      rainChance: Math.round(hourly.precipitation_probability[i]),
+      uvIndex: Math.round(hourly.uv_index[i]),
     })
   }
 
