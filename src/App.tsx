@@ -33,7 +33,7 @@ const decisionStyles: Record<
 
 function FieldLabel({ htmlFor, children }: { htmlFor: string; children: string }) {
   return (
-    <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-muted">
+    <label htmlFor={htmlFor} className="mb-1 block text-xs font-medium text-muted sm:text-sm">
       {children}
     </label>
   )
@@ -121,41 +121,41 @@ export default function App() {
 
           <form
             onSubmit={onSubmit}
-            className="animate-rise delay-1 mt-8 space-y-3 rounded-2xl bg-panel/95 p-4 text-ink shadow-[0_20px_50px_rgba(7,36,28,0.28)] backdrop-blur-sm sm:p-5"
+            className="animate-rise delay-1 mt-6 w-full min-w-0 space-y-2.5 overflow-hidden rounded-2xl bg-panel/95 p-3 text-ink shadow-[0_20px_50px_rgba(7,36,28,0.28)] backdrop-blur-sm sm:mt-8 sm:space-y-3 sm:p-5"
           >
-            <div>
+            <div className="min-w-0">
               <FieldLabel htmlFor={courseId}>Golf course</FieldLabel>
               <input
                 id={courseId}
                 value={courseQuery}
                 onChange={(e) => setCourseQuery(e.target.value)}
-                className="w-full min-w-0 rounded-xl border border-fog bg-white px-3.5 py-3 outline-none transition focus:border-moss"
+                className="field-input"
                 placeholder="Course name"
                 autoComplete="off"
                 required
               />
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="min-w-0">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+              <div className="min-w-0 overflow-hidden">
                 <FieldLabel htmlFor={dateId}>Date</FieldLabel>
                 <input
                   id={dateId}
                   type="date"
                   value={playDate}
                   onChange={(e) => setPlayDate(e.target.value)}
-                  className="w-full min-w-0 max-w-full rounded-xl border border-fog bg-white px-3.5 py-3 outline-none transition focus:border-moss"
+                  className="field-input"
                   required
                 />
               </div>
-              <div className="min-w-0">
+              <div className="min-w-0 overflow-hidden">
                 <FieldLabel htmlFor={timeId}>Tee time</FieldLabel>
                 <input
                   id={timeId}
                   type="time"
                   value={teeTime}
                   onChange={(e) => setTeeTime(e.target.value)}
-                  className="w-full min-w-0 max-w-full rounded-xl border border-fog bg-white px-3.5 py-3 outline-none transition focus:border-moss"
+                  className="field-input"
                   required
                 />
               </div>
@@ -164,7 +164,7 @@ export default function App() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-pine px-4 py-3.5 text-base font-semibold text-white transition hover:bg-pine-deep disabled:cursor-wait disabled:opacity-70"
+              className="w-full rounded-xl bg-pine px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-pine-deep disabled:cursor-wait disabled:opacity-70 sm:py-3 sm:text-base"
             >
               {loading ? 'Checking conditions…' : 'Get forecast'}
             </button>

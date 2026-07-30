@@ -37,6 +37,51 @@
   input {
     font: inherit;
   }
+
+  /* iOS Safari date/time controls ignore normal width rules otherwise. */
+  input[type="date"],
+  input[type="time"] {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type="date"]::-webkit-date-and-time-value,
+  input[type="time"]::-webkit-date-and-time-value {
+    text-align: left;
+  }
+}
+
+@layer components {
+  .field-input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-fog);
+    background: white;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.25;
+    outline: none;
+    transition: border-color 150ms ease;
+  }
+
+  .field-input:focus {
+    border-color: var(--color-moss);
+  }
+
+  @media (min-width: 640px) {
+    .field-input {
+      padding: 0.7rem 0.875rem;
+      font-size: 1rem;
+    }
+  }
 }
 
 @keyframes rise-in {
